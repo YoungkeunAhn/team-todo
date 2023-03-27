@@ -7,13 +7,14 @@ import {
 } from 'react-native'
 const { width: WINDOW_WIDTH } = Dimensions.get('window')
 
-export default function ListItem(props) {
+export default function TodoItem(props) {
   const { todo } = props
   const { id, title, content, createdAt, finishedAt } = todo
 
   return (
     <View>
       <View style={styles.container}>
+        <Text>{createdAt}</Text>
         <View style={styles.header}>
           <Text style={styles.title}>{title}</Text>
           <TouchableOpacity>
@@ -28,23 +29,30 @@ export default function ListItem(props) {
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: '#eee',
     padding: 10,
     marginBottom: 20,
+    shadowColor: '#eee',
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
+    shadowRadius: 10,
+    elevation: 5,
+    width: WINDOW_WIDTH - 40,
   },
 
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: 5,
     width: WINDOW_WIDTH - 80,
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white',
+    fontSize: 18,
+    color: 'black',
   },
   content: {
     color: '#ccc',

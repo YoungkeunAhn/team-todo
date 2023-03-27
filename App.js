@@ -1,8 +1,9 @@
 import dayjs from 'dayjs'
 import { StatusBar } from 'expo-status-bar'
-import { useEffect, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import ListItem from './components/list-item/ListItem'
+import { useState } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import TeamList from './components/team-list/list/TeamList'
+import TodoList from './components/todo-list/list/TodoList'
 
 const fakeTodo = [
   {
@@ -21,20 +22,40 @@ const fakeTodo = [
   },
 ]
 
+const teamList = [
+  {
+    id: 'all',
+    name: '전체',
+    thumbnail: '',
+    todoLength: 10,
+  },
+  {
+    id: 'my',
+    name: 'MY',
+    thumbnail: '',
+    todoLength: 3,
+  },
+  {
+    id: 'study',
+    name: '공부',
+    thumbnail:
+      'https://cdn.dribbble.com/userupload/3566469/file/original-535450994b24c5240fdce3cf476c1194.png?compress=1&resize=400x300&vertical=top',
+    todoLength: 7,
+  },
+]
+
 export default function App() {
   const [day, setDay] = useState(dayjs(new Date()).format('YYYY-MM-DD'))
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={styles.day}>{day}</Text>
-      </View>
-      <View style={styles.list}>
-        {fakeTodo.map((todo, idx) => (
-          <ListItem key={idx} todo={todo} />
-        ))}
-        <StatusBar style='light' />
-      </View>
+      </View> */}
+      <TeamList teamList={teamList} />
+      <TodoList todoList={fakeTodo} />
+
+      <StatusBar style="dark" />
     </View>
   )
 }
@@ -42,7 +63,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
     justifyContent: 'center',
   },
   day: {
@@ -55,14 +76,5 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 10,
     paddingHorizontal: 20,
-  },
-  list: {
-    // backgroundColor: 'tomato',
-    flex: 3,
-    flexDirection: 'column',
-
-    padding: 20,
-
-    alignItems: 'flex-start',
   },
 })
