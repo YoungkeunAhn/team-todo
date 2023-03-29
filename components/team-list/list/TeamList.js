@@ -20,5 +20,6 @@ const styles = StyleSheet.create({
     width: WINDOW_WIDTH,
     flexDirection: 'row',
     marginTop: 80,
+    marginBottom: 40,
   },
 })

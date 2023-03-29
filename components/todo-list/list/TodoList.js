@@ -14,12 +14,8 @@ export default function TodoList(props) {
 
 const styles = StyleSheet.create({
   list: {
-    // backgroundColor: 'tomato',
-    flex: 3,
     flexDirection: 'column',
-
     padding: 20,
-
     alignItems: 'flex-start',
   },
 })

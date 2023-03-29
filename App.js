@@ -1,7 +1,8 @@
 import dayjs from 'dayjs'
+import { Calendar, LocaleConfig } from 'react-native-calendars'
 import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Platform, StyleSheet, View } from 'react-native'
 import TeamList from './components/team-list/list/TeamList'
 import TodoList from './components/todo-list/list/TodoList'
 
@@ -45,7 +46,9 @@ const teamList = [
 ]
 
 export default function App() {
-  const [day, setDay] = useState(dayjs(new Date()).format('YYYY-MM-DD'))
+  const [currentDate, setCurrentDate] = useState(
+    dayjs(new Date()).format('YYYY-MM-DD')
+  )
 
   return (
     <View style={styles.container}>
@@ -53,6 +56,13 @@ export default function App() {
         <Text style={styles.day}>{day}</Text>
       </View> */}
       <TeamList teamList={teamList} />
+      <Calendar
+        current={currentDate}
+        onDayPress={(day) => {
+          console.log(day.dateString)
+          setCurrentDate(day.dateString)
+        }}
+      />
       <TodoList todoList={fakeTodo} />
 
       <StatusBar style="dark" />
@@ -61,11 +71,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#000000',
-    justifyContent: 'center',
-  },
   day: {
     color: 'white',
     fontSize: 30,
